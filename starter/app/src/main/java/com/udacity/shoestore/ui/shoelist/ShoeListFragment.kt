@@ -10,9 +10,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.R
+import com.udacity.shoestore.databinding.ActivityMainBinding.inflate
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
 import com.udacity.shoestore.models.Shoe
+import java.util.zip.Inflater
 
 class ShoeListFragment : Fragment() {
     private val viewModel: ShoeViewModel by activityViewModels()
@@ -29,21 +32,18 @@ class ShoeListFragment : Fragment() {
         )
         (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         linearLayout = binding.linearView
-        val args = ShoeListFragmentArgs.fromBundle(requireArguments())
-        var shoe: Shoe? = args?.shoe ?: null
 
-        Log.i("ShoeListFragment", "The ${shoe?.name ?: "Raghad"} has been added")
         binding.fab.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_shoeListFragment_to_shoeDetailsFragment)
         }
-        if (shoe != null) {
-            viewModel.addItem(shoe!!)
+
+
             viewModel.shoe.observe(viewLifecycleOwner) { shoe ->
                 for (i in shoe) {
                     addNewItem(i)
                 }
             }
-        }
+
         setHasOptionsMenu(true)
         return binding.root
 
@@ -83,5 +83,16 @@ class ShoeListFragment : Fragment() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.logout_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            when (item.itemId) {
+                R.id.logOut -> findNavController().navigate(R.id.loginFragment)
+            }
+        return super.onOptionsItemSelected(item)
+    }
 
 }

@@ -21,7 +21,7 @@ class InstructionFragment : Fragment() {
         )
         binding.shopListButton.setOnClickListener { view: View ->
             view.findNavController().navigate(
-                InstructionFragmentDirections.actionInstructionFragmentToShoeListFragment(null)
+                R.id.action_instructionFragment_to_shoeListFragment
             )
         }
         return binding.root

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!--    LinearLayout is used since we are arranging list vertically-->
+    <data>
+        <variable
+            name="viewModel"
+            type="com.udacity.shoestore.ui.shoelist.ShoeViewModel" />
+    </data>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,6 +23,7 @@
     <EditText
         android:id="@+id/name"
         android:inputType="text"
+        android:text="@={viewModel.shoeName}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
@@ -27,6 +34,7 @@
     <EditText
         android:id="@+id/company"
         android:inputType="text"
+        android:text="@={viewModel.shoeCompany}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
@@ -37,6 +45,7 @@
     <EditText
         android:id="@+id/size"
         android:inputType="numberDecimal"
+        android:text="@{Double.toString(viewModel.shoeSize)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
@@ -47,6 +56,7 @@
     <EditText
         android:id="@+id/description"
         android:inputType="text"
+        android:text="@={viewModel.shoeDescription}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
